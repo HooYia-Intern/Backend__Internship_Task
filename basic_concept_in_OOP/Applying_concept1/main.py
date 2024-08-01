@@ -129,14 +129,15 @@ def main():
     student = student1.retrieve_student(student_id)
     print("Retrieved Student:", student)
     
-   
-    updated_student = Student("Johnny", "Doe", "1990-01-01", "johnny.doe@example.com", "0987654321")
-    student1.update_student(student_id, updated_student)
+    student_id2 = students[0][1]
+    updated_student = Student("MAX", "Sender", "1990-01-01", "johnny.doe@example.com", "0987654321")
+    student1.update_student(student_id2, updated_student)
+    
     
    
     student1.delete_student(student_id)
     students = student1.list_students()
-    print("All Students:", students)
+    print("All Students after deletion:", students)
 
 if __name__ == "__main__":
     main()
