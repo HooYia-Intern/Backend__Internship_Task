@@ -19,7 +19,7 @@ def create_database():
     ''')  # SQL query to create the students table
     conn.commit()  # Commit the changes
     conn.close()  # Close the connection
-
+  
 # Abstract base class for database operations
 class DatabaseOperations(ABC):
 
