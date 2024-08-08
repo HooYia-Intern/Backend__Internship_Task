@@ -1,94 +1,67 @@
-import json
 import os
 
-# Initial data
-books = []
-members = {}
+# File path for the to-do list
+TODO_FILE = "todo_list.txt"
 
-def display_books():
-    if not books:
-        print("No books available in the library.")
+def add_task(task):
+    with open(TODO_FILE, "a") as file:
+        file.write(task + "\n")
+    print(f"Task '{task}' added to the to-do list.")
+
+def view_tasks():
+    if not os.path.exists(TODO_FILE):
+        print("No tasks found.")
+        return
+    
+    with open(TODO_FILE, "r") as file:
+        tasks = file.readlines()
+    
+    if not tasks:
+        print("No tasks found.")
     else:
-        print("Books in the library:")
-        for book in books:
-            print(book)
+        print("To-Do List:")
+        for index, task in enumerate(tasks, start=1):
+            print(f"{index}. {task.strip()}")
 
-def is_book_available(book_name):
-    return book_name in books
-
-def add_book(book_name):
-    if book_name not in books:
-        books.append(book_name)
-        print(f"Book '{book_name}' added to the library.")
-    else:
-        print(f"Book '{book_name}' already exists in the library.")
-
-def lend_book(member_name, book_name):
-    if is_book_available(book_name):
-        if member_name not in members:
-            members[member_name] = []
-        members[member_name].append(book_name)
-        books.remove(book_name)
-        print(f"Book '{book_name}' lent to {member_name}.")
-    else:
-        print(f"Book '{book_name}' is not available.")
-
-def get_member_books(member_name):
-    try:
-        return members[member_name]
-    except KeyError:
-        print(f"Member '{member_name}' does not exist.")
-        return []
-
-def save_library_data():
-    data = {"books": books, "members": members}
-    with open("library_data.json", "w") as file:
-        json.dump(data, file)
-    print("Library data saved.")
-
-def load_library_data():
-    global books, members
-    try:
-        with open("library_data.json", "r") as file:
-            data = json.load(file)
-            books = data["books"]
-            members = data["members"]
-        print("Library data loaded.")
-    except FileNotFoundError:
-        print("No saved library data found.")
+def remove_task(task_number):
+    if not os.path.exists(TODO_FILE):
+        print("No tasks found.")
+        return
+    
+    with open(TODO_FILE, "r") as file:
+        tasks = file.readlines()
+    
+    if task_number < 1 or task_number > len(tasks):
+        print(f"Invalid task number: {task_number}")
+        return
+    
+    removed_task = tasks.pop(task_number - 1).strip()
+    
+    with open(TODO_FILE, "w") as file:
+        file.writelines(tasks)
+    
+    print(f"Task '{removed_task}' removed from the to-do list.")
 
 def main():
-    load_library_data()
-
     while True:
-        print("\nLibrary Menu")
-        print("1. Display Books")
-        print("2. Add Book")
-        print("3. Lend Book")
-        print("4. View Member's Books")
-        print("5. Save & Exit")
+        print("\nTo-Do List Menu")
+        print("1. Add Task")
+        print("2. View Tasks")
+        print("3. Remove Task")
+        print("4. Exit")
         
         choice = input("Enter your choice: ").strip()
         
         if choice == "1":
-            display_books()
+            task = input("Enter the task: ").strip()
+            add_task(task)
         elif choice == "2":
-            book_name = input("Enter the book name: ").strip()
-            add_book(book_name)
+            view_tasks()
         elif choice == "3":
-            member_name = input("Enter the member's name: ").strip()
-            book_name = input("Enter the book name: ").strip()
-            lend_book(member_name, book_name)
+            task_number = int(input("Enter the task number to remove: ").strip())
+            remove_task(task_number)
         elif choice == "4":
-            member_name = input("Enter the member's name: ").strip()
-            books = get_member_books(member_name)
-            if books:
-                print(f"Books borrowed by {member_name}: {', '.join(books)}")
-            else:
-                print(f"{member_name} has not borrowed any books.")
-        elif choice == "5":
-            save_library_data()
-            print("Exiting the library system.")
+            print("Exiting the to-do list application.")
             break
         else:
             print("Invalid choice. Please try again.")
