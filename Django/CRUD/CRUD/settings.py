@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-vtwxg8a#otl90si=c#!1@wqmwtbc*)gjvi&t$35b00ul$g)j*7'
+SECRET_KEY = 'django-insecure-f4uv=o+24j&ard(7%&@7#5e%kqp#pw09w)n%08060%=#d+8_cy'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -38,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'my_app'
 ]
 
 MIDDLEWARE = [
@@ -53,12 +51,10 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'CRUD.urls'
 
-TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATES_DIR],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -70,8 +66,6 @@ TEMPLATES = [
         },
     },
 ]
-
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "/static")]
 
 WSGI_APPLICATION = 'CRUD.wsgi.application'
 
