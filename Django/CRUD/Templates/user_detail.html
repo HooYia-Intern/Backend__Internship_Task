@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ user.first_name }} {{ user.name }}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>{{ user.first_name }} {{ user.name }}</h1>
+        <p><strong>Country:</strong> {{ user.country }}</p>
+        <p><strong>Date of Birth:</strong> {{ user.dob }}</p>
+        <a href="{% url 'user_update' user.id %}" class="btn btn-primary">Edit</a>
+        <form action="{% url 'user_delete' user.id %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+        <a href="{% url 'user_list' %}" class="btn btn-secondary">Back to list</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>User List</h1>
+        <a href="{% url 'user_create' %}" class="btn btn-primary">Add New User</a>
+        <ul class="list-group mt-3">
+            {% for user in users %}
+                <li class="list-group-item">
+                    <a href="{% url 'user_detail' user.id %}">{{ user.first_name }} {{ user.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CRUD Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>CRUD Operations</h1>
+        <a href="{% url 'user_list' %}" class="btn btn-primary">View Users</a>
+        <a href="{% url 'user_create' %}" class="btn btn-success">Add New User</a>
+    </div>
+</body>
+</html>
